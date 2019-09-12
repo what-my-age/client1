@@ -1,15 +1,19 @@
 <template>
   <div class="box-card">
     <div class="card" v-for="(p,i) in foto" :key="i">
-      <img :src="p.image" alt="Avatar" style="width:100%">
+      <img :src="p.image" alt="Avatar" style="width:100%; height : 300px">
 
       <div class="container">
         <h4><b>{{ p.title }}</b></h4>
         <vs-chip v-for="(l,i) in p.tags" :key="i">
           {{l}}
         </vs-chip>
-        <button v-on:click.prevent="shareFb(p.image)" data-js="facebook-share" class="btn" id="shareBtn"><i class="fab fa-facebook-f"></i></button>
-        <button v-on:click.prevent="shareTwitter(p.image)" data-js="twitter-share" class="btn" id="shareBtn"><i class="fab fa-twitter"></i></button> 
+
+        <div class="btn">
+          <button>Remove</button>
+          <button v-on:click.prevent="shareFb(p.image)" data-js="facebook-share" class="btn" id="shareBtn"><i class="fab fa-facebook-f"></i></button>
+          <button v-on:click.prevent="shareTwitter(p.image)" data-js="twitter-share" class="btn" id="shareBtn"><i class="fab fa-twitter"></i></button> 
+        </div>
       </div>
     </div>
   </div>
@@ -37,14 +41,22 @@ export default {
 
 <style>
   .box-card{
-    display: flex;
-    justify-content: space-around
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 20px; 
+    /* background-color: #2196F3; */
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+    justify-content: center;
   }
 
   .card {
+    /* display: flex; */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 350px;
+    height: 600px;;
   }
 
   .card:hover {
@@ -53,5 +65,11 @@ export default {
 
   .container {
     padding: 2px 16px;
+  }
+
+  .btn{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 100%;
   }
 </style>
