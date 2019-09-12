@@ -24,6 +24,7 @@ data : function(){
     header{
         display: flex;
         align-items: center;
+        justify-content: center;
         flex-direction: column;
         width: 100%;
         height: 300px;
@@ -33,8 +34,9 @@ data : function(){
     .input{
         display: flex;
         justify-content: space-around;
-        align-items: center;
-        background-color: #aaa;
+        align-content: center;
+        height: 100px;
+        /* background-color: #aaa; */
         width: 60%
     }
 
@@ -43,17 +45,24 @@ data : function(){
         height: 40px;
         border-radius: 20px;
         font-size: 20px;
+        margin-bottom: 0;
     }
 
     input[type="text"]{
         width: 200px;
         height: 40px;
         border-radius: 10px;
+        margin-bottom: 0;
+
     }
 
     input[type="file"]{
-        width: 80px;
+        width: 200px;
+        margin-bottom: 0;
         height: 40px;
         border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center
     }
 </style>
