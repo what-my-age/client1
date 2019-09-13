@@ -66,6 +66,7 @@ export default {
   min-width: 100vw;
   min-height: 100vh;
 }
+
 .showLogin {
   min-width: 50vw;
   min-height: 100vh;
