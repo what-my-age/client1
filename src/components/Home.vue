@@ -22,11 +22,11 @@ export default {};
 
 .home{
   position: absolute;
-  margin-top: -40px; 
+  margin-top: 3%; 
   min-width: 100vw;
   color: white;
-  font-size: 45px; 
-  margin-left: 45px; 
+  font-size: 47px; 
+  margin-left: 1.5%; 
 }
 
 .triangle h1 {

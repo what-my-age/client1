@@ -59,13 +59,13 @@ export default {
   align-items: center;
   background: linear-gradient(
     124deg,
-    rgb(10, 110, 64),
-    rgb(6, 161, 45),
+    rgb(2, 119, 64),
+    rgb(18, 228, 71),
     rgb(47, 230, 220)
     
   );
   background-size: 1800% 1800%;
-  -webkit-animation: rainbow 11s ease infinite;
+  -webkit-animation: rainbow 1.5s ease infinite;
   -z-animation: rainbow 1.5s ease infinite;
   -o-animation: rainbow 1.5s ease infinite;
   animation: rainbow 1.5s ease infinite;
@@ -87,6 +87,8 @@ export default {
 }
 .box h1 {
   color: rgb(17, 12, 2);
+  font-weight: bolder;
+  font-size: 40px; 
   text-align: center;
   margin-bottom: 3%;
 }

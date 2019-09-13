@@ -5,11 +5,11 @@
         <div class="showLogin" v-if="showLogin">
           <div class="box">
             <h1>Log In</h1>
-            <form action class="formLogin">
-              <label for class="login">Email</label>
-              <input type="text" class="login" />
+            <form action class="formLogin" @submit.prevent="signIn">
+              <label for class="login" >Email</label>
+              <input type="text" class="login" v-model="emailLogin"/>
               <label for class="login">Password</label>
-              <input type="password" class="login" />
+              <input type="password" class="login" v-model="passwordLogin"/>
               <button type="submit" class="btn btn-dark btn-lg login">Submit</button>
             </form>
           </div>
@@ -20,11 +20,28 @@
 </template>
 
 <script>
+let baseURL;
 export default {
   data() {
     return {
-      showLogin: true
+      showLogin: true,
+      emailLogin : '',
+      passwordLogin : ''
     };
+  },
+  methods : {
+    signIn(){
+      let email = this.emailLogin;
+      let password = this.passwordLogin;
+      axios({
+        method : 'post',
+        url : baseURL+'',
+        data : {
+          email,
+          password
+        }
+      })
+    }
   }
 };
 </script>
@@ -59,7 +76,7 @@ export default {
     124deg,
     #a32b06,
     #eb8705,
-    #effd28
+    #efff0a
   );
   background-size: 1800% 1800%;
   -webkit-animation: rainbow 1.5s ease infinite;
@@ -67,6 +84,7 @@ export default {
   -o-animation: rainbow 1.5s ease infinite;
   animation: rainbow 1.5s ease infinite;
 }
+
 .formLogin {
   min-height: 24vh;
   display: flex;
@@ -84,6 +102,8 @@ export default {
 }
 .box h1 {
   color: rgb(17, 12, 2);
+  font-weight: bolder;
+  font-size: 40px; 
   text-align: center;
   margin-bottom: 3%;
 }
