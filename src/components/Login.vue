@@ -1,46 +1,64 @@
 <template>
   <div>
     <div class="backgroundLogin">
-      <transition name="fade">
-        <div class="showLogin" v-if="showLogin">
-          <div class="box">
-            <h1>Log In</h1>
-            <form action class="formLogin" @submit.prevent="signIn">
-              <label for class="login" >Email</label>
-              <input type="text" class="login" v-model="emailLogin"/>
-              <label for class="login">Password</label>
-              <input type="password" class="login" v-model="passwordLogin"/>
-              <button type="submit" class="btn btn-dark btn-lg login">Submit</button>
-            </form>
-          </div>
+      <div class="showLogin" v-if="showLogin">
+        <div class="box">
+          <h1>Log In</h1>
+          <form action class="formLogin" @submit.prevent="signIn">
+            <label for class="login">Email</label>
+            <input type="text" class="login" v-model="emailLogin" />
+            <label for class="login">Password</label>
+            <input type="password" class="login" v-model="passwordLogin" />
+            <button type="submit" class="btn btn-dark btn-lg login">Submit</button>
+          </form>
         </div>
-      </transition>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-let baseURL;
+let baseURL = "http://localhost:3000";
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
       showLogin: true,
-      emailLogin : '',
-      passwordLogin : ''
+      emailLogin: "",
+      passwordLogin: ""
     };
   },
-  methods : {
-    signIn(){
+  methods: {
+    signIn() {
       let email = this.emailLogin;
       let password = this.passwordLogin;
+      Swal.fire({
+        title: "Loggin in...",
+        allowOutsideClick: () => !Swal.isLoading()
+      });
+      Swal.showLoading();
       axios({
-        method : 'post',
-        url : baseURL+'',
-        data : {
+        method: "POST",
+        url: baseURL + "/user/login",
+        data: {
           email,
           password
         }
       })
+        .then(({ data }) => {
+          Swal.close();
+          Swal.fire("Success!", "Login Success!", "success");
+          this.emailLogin = "";
+          this.passwordLogin = "";
+          localStorage.setItem("token", data.token);
+          this.$emit("doneLogin");
+        })
+        .catch(error => {
+          let msg = error.response.data.message || "Wrong Email/Password";
+          Swal.fire("Error!", error.response.data.message, "error");
+          this.emailLogin = "";
+          this.passwordLogin = "";
+        });
     }
   }
 };
@@ -73,12 +91,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(
-    124deg,
-    #a32b06,
-    #eb8705,
-    #efff0a
-  );
+  background: linear-gradient(124deg, #a32b06, #eb8705, #efff0a);
   background-size: 1800% 1800%;
   -webkit-animation: rainbow 1.5s ease infinite;
   -z-animation: rainbow 1.5s ease infinite;
@@ -104,7 +117,7 @@ export default {
 .box h1 {
   color: rgb(17, 12, 2);
   font-weight: bolder;
-  font-size: 40px; 
+  font-size: 40px;
   text-align: center;
   margin-bottom: 3%;
 }
@@ -149,23 +162,47 @@ label.login {
   margin-bottom: 0.5vh;
 }
 @-webkit-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
 }
 @-moz-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
 }
 @-o-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
 }
-@keyframes rainbow { 
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+@keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
 }
 </style>

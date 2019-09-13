@@ -4,7 +4,7 @@
       <div class="slider">
         <div class="rectangle">
           <div class="home">
-          <h1 class="product"> Me <br> Tag <br>Tag!</h1>
+          <h1 class="product"> Whats <br> My <br>Age?</h1>
           </div>
         <div class="triangle">
         </div>
