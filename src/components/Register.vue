@@ -1,32 +1,73 @@
 <template>
   <div>
     <div class="backgroundRegist">
-      <transition name="fade">
-        <div class="showRegist" v-if="showRegist">
-          <div class="box">
-            <h1>Register</h1>
-            <form action class="formRegist">
-              <label class="register">Name</label>
-              <input type="text" class="register"/>
-              <label class="register">Email</label>
-              <input type="text" class="register"/>
-              <label class="register">Password</label>
-              <input type="password" class="register"/>
-              <button type="submit" class="btn btn-dark btn-lg register">Submit</button>
-            </form>
-          </div>
+      <div class="showRegist" v-if="showRegist">
+        <div class="box">
+          <h1>Register</h1>
+          <form action class="formRegist" @submit.prevent="registMe">
+            <label class="register">Name</label>
+            <input type="text" class="register" v-model="name" />
+            <label class="register">Email</label>
+            <input type="text" class="register" v-model="email" />
+            <label class="register">Password</label>
+            <input type="password" class="register" v-model="password" />
+            <button type="submit" class="btn btn-dark btn-lg register">Submit</button>
+          </form>
         </div>
-      </transition>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+let baseUrl = "http://localhost:3000";
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
-      showRegist: true
+      showRegist: true,
+      name: "",
+      email: "",
+      password: ""
     };
+  },
+  methods: {
+    registMe() {
+      let name = this.name;
+      let email = this.email;
+      let password = this.password;
+      Swal.fire({
+        title: "Creating Your Account...",
+        allowOutsideClick: () => !Swal.isLoading()
+      });
+      Swal.showLoading();
+      axios({
+        method: "POST",
+        url: baseUrl + "/user/register",
+        data: {
+          name,
+          email,
+          password
+        }
+      })
+        .then(response => {
+          Swal.close();
+          Swal.fire("Success!", "Your Account is Created!", "success");
+          this.name = "";
+          this.email = "";
+          this.password = "";
+          this.$emit("doneRegister");
+        })
+        .catch(error => {
+          let msg = error.response.data.message || "Fail to Register";
+          Swal.fire("Error!", msg, "error");
+          this.name = "";
+          this.email = "";
+          this.password = "";
+        });
+    }
+  },
+  created() {
   }
 };
 </script>
@@ -62,7 +103,6 @@ export default {
     rgb(2, 119, 64),
     rgb(18, 228, 71),
     rgb(47, 230, 220)
-    
   );
   background-size: 1800% 1800%;
   -webkit-animation: rainbow 1.5s ease infinite;
@@ -88,14 +128,14 @@ export default {
 .box h1 {
   color: rgb(17, 12, 2);
   font-weight: bolder;
-  font-size: 40px; 
+  font-size: 40px;
   text-align: center;
   margin-bottom: 3%;
 }
 input.register {
   height: 30px;
   margin-bottom: 3%;
-  font-size: 12pt; 
+  font-size: 12pt;
   width: 44%;
 }
 button.register {
@@ -109,7 +149,7 @@ button.register {
     green
   );
   background-size: 400%;
-  border-style: inset; 
+  border-style: inset;
   color: whitesmoke;
   font-size: 12pt;
   height: 6vh;
@@ -128,28 +168,52 @@ button.register:hover {
   }
 }
 label.register {
-  font-size: 12pt; 
+  font-size: 12pt;
   margin-top: 2vh;
-  margin-bottom: 0.5vh; 
+  margin-bottom: 0.5vh;
 }
 @-webkit-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
 }
 @-moz-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
 }
 @-o-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
 }
-@keyframes rainbow { 
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+@keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
 }
 </style>
