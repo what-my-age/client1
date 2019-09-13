@@ -1,13 +1,16 @@
 <template>
-<div>
-    <Login v-if="!isLogin"></Login>
-<div v-if="isLogin">
-<Navbar></Navbar>
-<Header></Header>
-<Card :foto="photos"></Card>
-</div>
-
-</div>
+    <div>
+        <Login v-if="!isLogin"></Login>
+        <div v-if="isLogin">
+            <Navbar></Navbar>
+            <Header></Header>
+            <Card :foto="photos"></Card>
+        </div>
+        <NavLanding></NavLanding>
+        <Home></Home>
+        <Login></Login>
+        <Register></Register>
+    </div>
 </template>
 
 <script>
@@ -16,9 +19,11 @@ import Header from './components/Header.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
 import Navbar from './components/Navbar.vue'
+import Home from './components/Home.vue'
+import NavLanding from './components/NavLanding.vue'
 export default {
     components:{
-        Card, Header, Login, Register, Navbar
+        Card, Header, Login, Register, Navbar, Home, NavLanding
     },
     data(){
         return {
@@ -46,9 +51,7 @@ export default {
                 UserId: 'qeqweqweqeq'
             }]
         }
-    }
-
-}
+    }}
 </script>
 
 <style>
