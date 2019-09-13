@@ -4,10 +4,14 @@
       <img :src="p.image" alt="Avatar" style="width:100%; height : 300px">
 
       <div class="container">
-        <h4><b>{{ p.title }}</b></h4>
-        <vs-chip v-for="(l,i) in p.tags" :key="i">
-          {{l}}
-        </vs-chip>
+        <div>
+          <h4><b>Caption</b></h4>
+          <h4>Age</h4>
+          <h4>Gender</h4>
+          <vs-chip v-for="(l,i) in p.tags" :key="i">
+            {{l}}
+          </vs-chip>
+        </div>
 
         <div class="btn">
           <button>Remove</button>
@@ -52,7 +56,6 @@ export default {
   }
 
   .card {
-    /* display: flex; */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 350px;
@@ -65,6 +68,14 @@ export default {
 
   .container {
     padding: 2px 16px;
+    display: flex;
+    flex-direction: column;
+    height: 280px;
+    justify-content: space-between
+  }
+
+  .container h4{
+    margin: 10px 
   }
 
   .btn{

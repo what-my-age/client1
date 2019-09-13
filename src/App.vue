@@ -25,12 +25,12 @@ export default {
             isLogin: true,
             photos:[{
                 tags:['makan','minum'],
-                image: 'https://storage.cloud.google.com/whatmyage/15682782403921568012582108539813_3926240088399_1983784621_n.jpg',
+                image: 'https://images.unsplash.com/photo-1522556189639-b150ed9c4330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                 title:'DIA',
                 UserId: 'qeqweqweqeq'
             },{
                 tags:['makan','minum'],
-                image: 'https://storage.cloud.google.com/whatmyage/15682782403921568012582108539813_3926240088399_1983784621_n.jpg',
+                image: 'https://images.unsplash.com/photo-1550480993-0cbe209c2dce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                 title:'DIA',
                 UserId: 'qeqweqweqeq'
             },

@@ -21,5 +21,9 @@
         height: 50px;
     }
 
+    button{
+        cursor: pointer;
+    }
+
 
 </style>
